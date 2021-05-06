@@ -1,0 +1,7 @@
+{
+  "name": "reddit-vue-ionic",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue"
+}
