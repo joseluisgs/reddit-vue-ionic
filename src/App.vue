@@ -78,7 +78,7 @@ export default defineComponent({
       },
       {
         title: 'Acerca De',
-        url: '/folder/Outbox',
+        url: '/acercade',
         iosIcon: personCircleOutline,
         mdIcon: personCircleOutline,
       },

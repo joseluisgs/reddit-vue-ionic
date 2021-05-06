@@ -10,6 +10,10 @@ const routes: Array<RouteRecordRaw> = [
     path: '/folder/:id',
     component: () => import('../views/Folder.vue'),
   },
+  {
+    path: '/acercade',
+    component: () => import('../views/AcercaDe.vue'),
+  },
 ];
 
 const router = createRouter({
