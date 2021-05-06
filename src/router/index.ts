@@ -14,6 +14,12 @@ const routes: Array<RouteRecordRaw> = [
     path: '/acercade',
     component: () => import('../views/AcercaDe.vue'),
   },
+  {
+    path: '/post',
+    name: 'post',
+    component: () => import('../views/Post.vue'),
+    props: true,
+  },
 ];
 
 const router = createRouter({

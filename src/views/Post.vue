@@ -5,27 +5,26 @@
         <ion-buttons slot="start">
           <ion-menu-button color="primary"></ion-menu-button>
         </ion-buttons>
-        <ion-title>Reddit</ion-title>
+        <ion-title>Post</ion-title>
       </ion-toolbar>
     </ion-header>
 
     <ion-content :fullscreen="true">
       <ion-header collapse="condense">
         <ion-toolbar>
-          <ion-title size="large">Reddit</ion-title>
+          <ion-title size="large">Post</ion-title>
         </ion-toolbar>
       </ion-header>
-
-      <ion-card v-for="post in posts" :key="post.data.id">
-        <ion-img :src="post.data.thumbnail" v-if="post.data.thumbnail.startsWith('https://')" />
+     <ion-card>
+        <ion-img :src="thumbnail" v-if="thumbnail.startsWith('https://')"/>
         <ion-card-header>
-          <ion-card-subtitle>{{ post.data.author_fullname }}</ion-card-subtitle>
-          <ion-card-title>{{ post.data.title }}</ion-card-title>
+          <ion-card-subtitle>{{ author }}</ion-card-subtitle>
+          <ion-card-title>{{ title }}</ion-card-title>
         </ion-card-header>
         <ion-card-content>
           <!-- <ion-label>{{ post.data.selftext }}</ion-label> -->
-          <ion-button color="tertiary" expand="full" @click="viewMore(post.data)">
-            View More
+          <ion-button color="tertiary" extend="full" @click="$router.go(-1)">
+            Go back
           </ion-button>
         </ion-card-content>
       </ion-card>
@@ -33,7 +32,7 @@
   </ion-page>
 </template>
 
-<script lang="ts">
+<script>
 import { defineComponent } from 'vue';
 import {
   IonButtons,
@@ -52,10 +51,9 @@ import {
   IonButton,
 } from '@ionic/vue';
 
-import Reddit from '@/services/Reddit';
-
 export default defineComponent({
-  name: 'Reddit',
+  name: 'Post',
+  props: ['author', 'title', 'thumbnail'],
   components: {
     IonButtons,
     IonContent,
@@ -65,44 +63,20 @@ export default defineComponent({
     IonTitle,
     IonToolbar,
     IonCard,
-    IonImg,
-    IonCardHeader,
+    IonCardContent,
     IonCardSubtitle,
     IonCardTitle,
-    IonCardContent,
+    IonCardHeader,
+    IonImg,
     IonButton,
   },
-
   data: () => ({
-    posts: [],
+    image: '',
   }),
-
-  async created() {
-    this.posts = await Reddit.fetchAll();
-  },
-
-  methods: {
-    viewMore(post: any): void {
-      console.log(post);
-      this.$router.push({
-        name: 'post',
-        params: { author: post.author_fullname, title: post.title, thumbnail: post.thumbnail },
-      });
-    },
+  mounted() {
+    console.log(this.author, this.title);
+    // this.image = this.post.preview.images[0].source.url.replace('&amp;', '&');
+    // console.log(this.image);
   },
 });
 </script>
-
-<style scoped>
-.listaItem {
-  border: 1px solid blue;
-}
-/* .thumb {
-  width: 60px;
-  height: 60px;
-  border-radius: 30px;
-  margin-right: 15px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-} */
-</style>
