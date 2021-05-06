@@ -16,11 +16,19 @@
         </ion-toolbar>
       </ion-header>
 
-       <ion-card v-for="post in posts" :key="post.data.id" style="border: 1px solid blue;">
-         <ion-card-content>
-            <ion-label>{{post.data.title}}</ion-label>
-         </ion-card-content>
-       </ion-card>
+      <ion-card v-for="post in posts" :key="post.data.id">
+          <ion-img :src="post.data.thumbnail"  v-if="post.data.thumbnail.startsWith('https://')"/>
+        <ion-card-header>
+          <ion-card-subtitle>{{ post.data.author_fullname }}</ion-card-subtitle>
+          <ion-card-title>{{ post.data.title }}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <!-- <ion-label>{{ post.data.selftext }}</ion-label> -->
+          <ion-button color="tertiary" expand="full" @click="viewMore(post.data)">
+            View More
+          </ion-button>
+        </ion-card-content>
+      </ion-card>
     </ion-content>
   </ion-page>
 </template>
@@ -62,8 +70,15 @@ export default {
 </script>
 
 <style scoped>
-
-#container a {
-  text-decoration: none;
+.listaItem {
+  border: 1px solid blue;
 }
+/* .thumb {
+  width: 60px;
+  height: 60px;
+  border-radius: 30px;
+  margin-right: 15px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+} */
 </style>
