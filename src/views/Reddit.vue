@@ -16,18 +16,11 @@
         </ion-toolbar>
       </ion-header>
 
-      <div id="container">
-        <strong class="capitalize">Reddit</strong>
-        <p>
-          Explore
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            href="https://ionicframework.com/docs/components"
-            >UI Components</a
-          >
-        </p>
-      </div>
+       <ion-card v-for="post in posts" :key="post.data.id" style="border: 1px solid blue;">
+         <ion-card-content>
+            <ion-label>{{post.data.title}}</ion-label>
+         </ion-card-content>
+       </ion-card>
     </ion-content>
   </ion-page>
 </template>
@@ -43,6 +36,8 @@ import {
   IonToolbar,
 } from '@ionic/vue';
 
+import Reddit from '@/services/Reddit';
+
 export default {
   name: 'Reddit',
   components: {
@@ -54,30 +49,19 @@ export default {
     IonTitle,
     IonToolbar,
   },
+
+  data: () => ({
+    posts: [],
+  }),
+
+  async created() {
+    this.posts = await Reddit.fetchAll();
+    console.log(this.posts[1]);
+  },
 };
 </script>
 
 <style scoped>
-#container {
-  text-align: center;
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
-}
-
-#container p {
-  font-size: 16px;
-  line-height: 22px;
-  color: #8c8c8c;
-  margin: 0;
-}
 
 #container a {
   text-decoration: none;
