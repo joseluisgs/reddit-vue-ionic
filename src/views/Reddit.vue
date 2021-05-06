@@ -23,7 +23,6 @@
           <ion-card-title>{{ post.data.title }}</ion-card-title>
         </ion-card-header>
         <ion-card-content>
-          <!-- <ion-label>{{ post.data.selftext }}</ion-label> -->
           <ion-button color="tertiary" expand="full" @click="viewMore(post.data)">
             View More
           </ion-button>
@@ -82,11 +81,15 @@ export default defineComponent({
   },
 
   methods: {
-    viewMore(post: any): void {
-      console.log(post);
+    viewMore(post: any) {
       this.$router.push({
         name: 'post',
-        params: { author: post.author_fullname, title: post.title, thumbnail: post.thumbnail },
+        params: {
+          author: post.author_fullname,
+          title: post.title,
+          thumbnail: post.thumbnail,
+          selftext: post.selftext,
+        },
       });
     },
   },
@@ -97,12 +100,5 @@ export default defineComponent({
 .listaItem {
   border: 1px solid blue;
 }
-/* .thumb {
-  width: 60px;
-  height: 60px;
-  border-radius: 30px;
-  margin-right: 15px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-} */
+
 </style>

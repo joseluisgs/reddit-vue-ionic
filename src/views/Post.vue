@@ -22,8 +22,8 @@
           <ion-card-title>{{ title }}</ion-card-title>
         </ion-card-header>
         <ion-card-content>
-          <!-- <ion-label>{{ post.data.selftext }}</ion-label> -->
-          <ion-button color="tertiary" extend="full" @click="$router.go(-1)">
+          {{ selftext }}
+          <ion-button color="tertiary" expand="full" @click="back()">
             Go back
           </ion-button>
         </ion-card-content>
@@ -53,7 +53,7 @@ import {
 
 export default defineComponent({
   name: 'Post',
-  props: ['author', 'title', 'thumbnail'],
+  props: ['author', 'title', 'thumbnail', 'selftext'],
   components: {
     IonButtons,
     IonContent,
@@ -70,13 +70,12 @@ export default defineComponent({
     IonImg,
     IonButton,
   },
-  data: () => ({
-    image: '',
-  }),
-  mounted() {
-    console.log(this.author, this.title);
-    // this.image = this.post.preview.images[0].source.url.replace('&amp;', '&');
-    // console.log(this.image);
+
+  methods: {
+    back() {
+      this.$router.go(-1);
+    },
   },
+
 });
 </script>
