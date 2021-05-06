@@ -4,11 +4,11 @@ import { RouteRecordRaw } from 'vue-router';
 const routes: Array<RouteRecordRaw> = [
   {
     path: '',
-    redirect: '/folder/Inbox',
+    redirect: '/reddit',
   },
   {
-    path: '/folder/:id',
-    component: () => import('../views/Folder.vue'),
+    path: '/reddit',
+    component: () => import('../views/Reddit.vue'),
   },
   {
     path: '/acercade',

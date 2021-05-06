@@ -72,7 +72,7 @@ export default defineComponent({
     const appPages = [
       {
         title: 'Reddit',
-        url: '/folder/Inbox',
+        url: '/reddit',
         iosIcon: logoReddit,
         mdIcon: logoReddit,
       },
