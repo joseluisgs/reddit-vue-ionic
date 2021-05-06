@@ -11,14 +11,34 @@
 
     <ion-content :fullscreen="true">
       <ion-refresher slot="fixed" @ionRefresh="doRefresh($event)">
-      <ion-refresher-content></ion-refresher-content>
-    </ion-refresher>
+        <ion-refresher-content></ion-refresher-content>
+      </ion-refresher>
       <ion-header collapse="condense">
         <ion-toolbar>
           <ion-title size="large">Reddit</ion-title>
         </ion-toolbar>
       </ion-header>
 
+      <ion-list>
+        <ion-list-header> Post Recientes </ion-list-header>
+        <ion-item-sliding v-for="post in posts" :key="post.data.id">
+          <ion-item @click="viewMore(post.data)">
+            <ion-avatar slot="start">
+              <img :src="post.data.thumbnail" v-if="post.data.thumbnail.startsWith('https://')" />
+            </ion-avatar>
+            <ion-label>
+              <h2>{{ post.data.author_fullname }}</h2>
+              <h3>{{ post.data.title }}</h3>
+              <p>{{ post.data.created }}</p>
+            </ion-label>
+          </ion-item>
+          <ion-item-options side="end">
+            <ion-item-option @click="viewMore(post.data)">Read</ion-item-option>
+          </ion-item-options>
+        </ion-item-sliding>
+      </ion-list>
+
+      <!-- Si queremos una vista de cards -->
       <ion-card v-for="post in posts" :key="post.data.id">
         <ion-img :src="post.data.thumbnail" v-if="post.data.thumbnail.startsWith('https://')" />
         <ion-card-header>
@@ -53,6 +73,15 @@ import {
   IonCardContent,
   IonButton,
   IonRefresher,
+  IonList,
+  IonItem,
+  IonLabel,
+  IonAvatar,
+  IonItemOptions,
+  IonItemOption,
+  IonListHeader,
+  IonItemSliding,
+  IonRefresherContent,
 } from '@ionic/vue';
 
 import Reddit from '@/services/Reddit';
@@ -75,6 +104,15 @@ export default defineComponent({
     IonCardContent,
     IonButton,
     IonRefresher,
+    IonList,
+    IonItem,
+    IonLabel,
+    IonAvatar,
+    IonItemOptions,
+    IonItemOption,
+    IonListHeader,
+    IonItemSliding,
+    IonRefresherContent,
   },
 
   data: () => ({
@@ -109,5 +147,4 @@ export default defineComponent({
 .listaItem {
   border: 1px solid blue;
 }
-
 </style>
