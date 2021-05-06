@@ -19,6 +19,7 @@
         </ion-toolbar>
       </ion-header>
 
+      <!-- Si queremos una lista -->
       <ion-list>
         <ion-list-header> Post Recientes </ion-list-header>
         <ion-item-sliding v-for="post in posts" :key="post.data.id">
@@ -29,7 +30,7 @@
             <ion-label>
               <h2>{{ post.data.author_fullname }}</h2>
               <h3>{{ post.data.title }}</h3>
-              <p>{{ post.data.created }}</p>
+              <p>{{ (new Date(post.data.created)).toLocaleDateString('es-ES') }}</p>
             </ion-label>
           </ion-item>
           <ion-item-options side="end">
