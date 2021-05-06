@@ -10,6 +10,9 @@
     </ion-header>
 
     <ion-content :fullscreen="true">
+      <ion-refresher slot="fixed" @ionRefresh="doRefresh($event)">
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
       <ion-header collapse="condense">
         <ion-toolbar>
           <ion-title size="large">Reddit</ion-title>
@@ -49,6 +52,7 @@ import {
   IonCardTitle,
   IonCardContent,
   IonButton,
+  IonRefresher,
 } from '@ionic/vue';
 
 import Reddit from '@/services/Reddit';
@@ -70,6 +74,7 @@ export default defineComponent({
     IonCardTitle,
     IonCardContent,
     IonButton,
+    IonRefresher,
   },
 
   data: () => ({
@@ -91,6 +96,10 @@ export default defineComponent({
           selftext: post.selftext,
         },
       });
+    },
+    async doRefresh(event: CustomEvent) {
+      this.posts = await Reddit.fetchAll();
+      event.detail.complete();
     },
   },
 });
